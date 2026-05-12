@@ -208,53 +208,61 @@ mm.add(
       });
     }
 
-    gsap.utils.toArray('.volume-card').forEach((card, i) => {
-      const layer = card.querySelector('.bg, video.card-video');
-      if (layer) {
-        gsap.to(layer, {
-          yPercent: -12, scale: 1.1, ease: 'none',
-          scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true }
-        });
-      }
-
-      const startRot = i === 0 ? 14 : -14;
-
-      gsap.set(card, {
-        transformPerspective: 1400,
-        transformOrigin: '50% 50%',
-        rotationY: startRot,
-        rotationX: 8,
-        z: -120,
-        autoAlpha: 0,
-        y: 80
-      });
-
-      gsap.to(card, {
-        rotationY: i === 0 ? 6 : -6,
-        rotationX: 3,
-        z: 0,
+    const trendingCards = gsap.utils.toArray('.trending .volume-card');
+    if (trendingCards.length) {
+      gsap.set(trendingCards, { autoAlpha: 0, y: 42 });
+      gsap.to(trendingCards, {
         autoAlpha: 1,
         y: 0,
-        duration: 1.3,
+        duration: 1.1,
         ease: 'power3.out',
-        delay: i * 0.14,
+        stagger: 0.15,
         scrollTrigger: {
           trigger: '.trending',
           start: 'top 82%',
           toggleActions: 'play none none none'
         }
       });
+    }
 
-      gsap.to(card, {
-        rotationY: 0,
-        rotationX: 0,
-        scale: 1.015,
-        ease: 'none',
+    gsap.utils.toArray('.volume-card').forEach((card) => {
+      const layer = card.querySelector('.bg, video.card-video');
+      if (layer) {
+        gsap.to(layer, {
+          yPercent: -10, scale: 1.08, ease: 'none',
+          scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      }
+    });
+
+    const segmentRows = gsap.utils.toArray('.segment-rows .segment-row');
+    if (segmentRows.length) {
+      const segContainer = segmentRows[0].closest('.segment-rows') || segmentRows[0];
+      gsap.set(segmentRows, { autoAlpha: 0, x: -42 });
+      gsap.to(segmentRows, {
+        autoAlpha: 1,
+        x: 0,
+        duration: 0.95,
+        ease: 'power3.out',
+        stagger: 0.1,
         scrollTrigger: {
-          trigger: '.trending',
-          start: 'top 60%',
-          end: 'bottom 40%',
-          scrub: 1.1
+          trigger: segContainer,
+          start: 'top 86%',
+          toggleActions: 'play none none none'
+        }
+      });
+    }
+
+    gsap.utils.toArray('.section-head h2').forEach((heading) => {
+      gsap.set(heading, { clipPath: 'inset(0 100% 0 0)', willChange: 'clip-path' });
+      gsap.to(heading, {
+        clipPath: 'inset(0 0% 0 0)',
+        duration: 1.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: heading,
+          start: 'top 88%',
+          toggleActions: 'play none none none'
         }
       });
     });
