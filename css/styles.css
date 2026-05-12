@@ -888,3 +888,37 @@ main { will-change: opacity, transform; }
 @media (min-width: 1280px) {
   .hero { min-height: 700px; }
 }
+
+/* --- Hero v3: fullscreen video hero + Ken Burns zoom --- */
+.hero.has-video {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+.hero.has-video .hero-video {
+  object-fit: cover;
+  object-position: center;
+  transform-origin: center center;
+  will-change: transform;
+  animation: heroKenBurns 28s ease-in-out infinite alternate;
+}
+.hero.has-video::after {
+  background:
+    rgba(0, 0, 0, 0.55),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background: rgba(0, 0, 0, 0.55);
+}
+@keyframes heroKenBurns {
+  0%   { transform: scale(1.05) translate3d(0, 0, 0); }
+  100% { transform: scale(1.18) translate3d(-1.5%, -1%, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero.has-video .hero-video { animation: none; transform: none; }
+}
+@media (min-width: 900px) {
+  .hero.has-video { min-height: 100vh; min-height: 100svh; }
+  .hero.has-video h1 {
+    font-size: clamp(5rem, 7vw, 7.5rem);
+    line-height: 1.02;
+    max-width: 18ch;
+  }
+}
