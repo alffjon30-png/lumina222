@@ -4,6 +4,9 @@ import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import { initHero3D } from './hero3d.js';
 import { initAllBooks } from './book3d.js';
+import { initPageTransitions } from './transitions.js';
+
+initPageTransitions();
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -959,6 +959,17 @@ main { will-change: opacity, transform; }
   }
 }
 
+/* --- Page transition overlay --- */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 1;
+  will-change: opacity;
+}
+
 /* --- Curated Segments premium hover --- */
 .segment-row {
   position: relative;
