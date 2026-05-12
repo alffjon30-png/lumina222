@@ -889,6 +889,30 @@ main { will-change: opacity, transform; }
   .hero { min-height: 700px; }
 }
 
+/* --- 3D Book cards --- */
+.volume-card.has-book {
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(214, 178, 122, 0.10), transparent 60%),
+    linear-gradient(180deg, #0c1c28 0%, #06121a 100%);
+}
+.volume-card.has-book::before {
+  background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.65) 100%);
+  z-index: 1;
+}
+.book3d-mount {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+.book3d-mount canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+.volume-card.has-book .meta { position: relative; z-index: 2; }
+
 /* --- Hero v3: fullscreen video hero + Ken Burns zoom --- */
 .hero.has-video {
   min-height: 100vh;
