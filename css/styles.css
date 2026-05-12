@@ -946,3 +946,54 @@ main { will-change: opacity, transform; }
     max-width: 18ch;
   }
 }
+
+/* --- Curated Segments premium hover --- */
+.segment-row {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.segment-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(214, 178, 122, 0.0) 44%,
+    rgba(214, 178, 122, 0.22) 50%,
+    rgba(255, 230, 184, 0.32) 52%,
+    rgba(214, 178, 122, 0.22) 54%,
+    transparent 60%,
+    transparent 100%
+  );
+  transform: translateX(-120%);
+  transition: transform 0s linear;
+}
+.segment-row > * { position: relative; z-index: 1; }
+.segment-row:hover,
+.segment-row:focus-visible {
+  background: linear-gradient(180deg, rgba(214, 178, 122, 0.08), rgba(214, 178, 122, 0.03));
+  border-color: rgba(214, 178, 122, 0.55);
+  color: var(--gold);
+  box-shadow:
+    0 0 0 1px rgba(214, 178, 122, 0.15),
+    0 12px 32px -14px rgba(214, 178, 122, 0.45),
+    inset 0 0 22px rgba(214, 178, 122, 0.08);
+}
+.segment-row:hover::before,
+.segment-row:focus-visible::before {
+  transform: translateX(120%);
+  transition: transform 0.95s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .segment-row::before { display: none; }
+}
