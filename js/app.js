@@ -5,8 +5,10 @@ import 'lenis/dist/lenis.css';
 import { initHero3D } from './hero3d.js';
 import { initAllBooks } from './book3d.js';
 import { initPageTransitions } from './transitions.js';
+import { initCursor } from './cursor.js';
 
 initPageTransitions();
+initCursor();
 
 gsap.registerPlugin(ScrollTrigger);
 

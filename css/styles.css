@@ -959,6 +959,45 @@ main { will-change: opacity, transform; }
   }
 }
 
+/* --- Custom gold cursor --- */
+@media (hover: hover) and (pointer: fine) {
+  html, body { cursor: none; }
+  html *, body * { cursor: none; }
+}
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--gold);
+  background-color: transparent;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+  transition:
+    width 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),
+    height 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    opacity 0.2s ease;
+  will-change: transform, width, height;
+  mix-blend-mode: normal;
+}
+.cursor.visible { opacity: 1; }
+.cursor.hover {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(214, 178, 122, 0.3);
+  border-color: rgba(214, 178, 122, 0.65);
+}
+.cursor.down { transform-origin: center; }
+@media (hover: none), (pointer: coarse) {
+  .cursor { display: none; }
+}
+
 /* --- Page transition overlay --- */
 .page-transition {
   position: fixed;
