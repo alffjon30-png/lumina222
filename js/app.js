@@ -22,6 +22,24 @@ if (!reduceMotionGlobal) {
   gsap.ticker.lagSmoothing(0);
 }
 
+const topbar = document.querySelector('.topbar');
+if (topbar) {
+  const SCROLL_THRESHOLD = 80;
+  let ticking = false;
+  const syncTopbar = () => {
+    const scrolled = window.scrollY > SCROLL_THRESHOLD;
+    topbar.classList.toggle('scrolled', scrolled);
+    ticking = false;
+  };
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(syncTopbar);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  syncTopbar();
+}
+
 const progressBar = document.createElement('div');
 progressBar.className = 'scroll-progress';
 document.body.appendChild(progressBar);
